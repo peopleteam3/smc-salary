@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>더에스엠씨 | 2026-05 급여 확정보고</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=DM+Mono:wght@400;500&family=Bebas+Neue&display=swap');
+:root{--bg:#f5f6f8;--s1:#fff;--s2:#f0f2f5;--br:#dde1e7;--a:#2563a8;--a2:#3d7fc1;--a3:#c0392b;--tx:#1a2332;--mu:#5a6a7a;--di:#9aa5b1;}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--tx);font-family:'Noto Sans KR',sans-serif;font-size:14px;}
+.tab-nav{background:var(--s1);border-bottom:2px solid var(--br);position:sticky;top:0;z-index:100;box-shadow:0 1px 4px rgba(0,0,0,.06);}
+.tab-nav-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;}
+.tab-content{max-width:1200px;margin:0 auto;padding:36px 24px 100px;}
+.hdr{padding:40px 0 28px;border-bottom:2px solid var(--br);display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:36px;}
+.hdr h1{font-family:'Bebas Neue',sans-serif;font-size:44px;letter-spacing:.03em;line-height:1.1;}
+.hdr h1 span{color:var(--a);}
+.tag{display:inline-block;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.15em;padding:3px 9px;border-radius:3px;margin-bottom:10px;}
+.tg-a{background:rgba(37,99,168,.08);border:1px solid rgba(37,99,168,.2);color:var(--a);}
+.tg-b{background:rgba(61,127,193,.08);border:1px solid rgba(61,127,193,.2);color:var(--a2);margin-left:6px;}
+.hdr-right{text-align:right;font-family:'Noto Sans KR',sans-serif;font-size:11px;color:var(--mu);line-height:2;}
+.hdr-total{font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--a);display:block;margin-top:4px;}
+.exec{background:var(--s1);border:1px solid var(--br);border-left:3px solid var(--a);border-radius:12px;padding:22px 26px;margin-bottom:36px;box-shadow:0 1px 4px rgba(0,0,0,.05);}
+.exec-lbl{font-family:'Noto Sans KR',sans-serif;font-size:10px;letter-spacing:.08em;color:var(--a);margin-bottom:14px;}
+.exec-line{font-size:13px;line-height:1.9;}.exec-line::before{content:'•';color:var(--a);margin-right:8px;font-weight:700;}.exec-gap{height:6px;}
+.sec{margin-bottom:40px;}
+.sec-hd{display:flex;align-items:center;gap:10px;margin-bottom:16px;}
+.sec-num{font-family:'Noto Sans KR',sans-serif;font-size:10px;color:var(--a);background:rgba(37,99,168,.07);border:1px solid rgba(37,99,168,.15);padding:3px 8px;border-radius:4px;}
+.sec-ttl{font-size:15px;font-weight:800;color:var(--tx);}
+.kpi{display:grid;gap:12px;}
+.kcard{background:var(--s1);border:1px solid var(--br);border-radius:12px;padding:18px 20px;transition:border-color .2s,transform .2s;box-shadow:0 1px 4px rgba(0,0,0,.05);}
+.kcard:hover{border-color:var(--a);transform:translateY(-2px);}
+.k-lbl{font-size:10px;color:var(--mu);margin-bottom:8px;}
+.k-val{font-size:20px;color:var(--tx);line-height:1.1;font-weight:700;}
+.k-val small{font-size:11px;color:var(--mu);margin-left:2px;font-weight:400;}
+.k-delta{font-size:10px;margin-top:5px;}
+.up{color:#1a5fa8;}.dn{color:#c0392b;}
+.chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.cbox{background:var(--s1);border:1px solid var(--br);border-radius:12px;padding:20px;box-shadow:0 1px 4px rgba(0,0,0,.05);}
+.cbox.wide{grid-column:1/-1;}
+.c-lbl{font-size:12px;color:var(--a);letter-spacing:.02em;margin-bottom:14px;font-weight:800;display:flex;align-items:center;gap:6px;}
+.c-lbl::before{content:"";display:inline-block;width:3px;height:14px;background:var(--a);border-radius:2px;flex-shrink:0;}
+.hc-wrap{display:grid;grid-template-columns:200px 1fr;gap:0;align-items:stretch;}
+.hc-table-wrap{border-right:1px solid var(--br);padding-right:12px;}
+.hc-table-wrap table{width:100%;border-collapse:collapse;font-size:11px;}
+.hc-table-wrap th{background:var(--s2);padding:4px 6px;font-size:10px;color:var(--mu);text-align:left;}
+.hc-table-wrap td{padding:3px 6px;border-bottom:1px solid var(--s2);}
+.hc-table-wrap td:last-child{text-align:right;font-family:'Noto Sans KR',sans-serif;}
+.hc-chart-wrap{padding-left:14px;display:flex;flex-direction:column;justify-content:center;}
+.tcard{background:var(--s1);border:1px solid var(--br);border-radius:12px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.05);}
+.tcard-scroll{overflow-x:auto;}
+table{width:100%;border-collapse:collapse;font-size:11px;}
+th{background:var(--s2);color:var(--mu);font-size:10px;font-weight:600;padding:9px 10px;text-align:left;border-bottom:1px solid var(--br);white-space:nowrap;}
+td{padding:7px 10px;border-bottom:1px solid var(--s2);font-size:11px;color:var(--mu);line-height:1.6;vertical-align:middle;}
+td:first-child{font-weight:600;color:var(--tx);}
+td small{font-size:9px;color:var(--mu);font-weight:400;}
+tr.cur td{color:var(--a);font-weight:600;padding:7px 10px;line-height:1.6;vertical-align:middle;white-space:nowrap;}tr:hover td{background:rgba(37,99,168,.03);}tr:last-child td{border-bottom:none;}
+.diff-grid{display:grid;grid-template-columns:1fr auto 1fr;background:var(--s1);border:1px solid var(--br);border-radius:12px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.05);}
+.diff-card{padding:22px 26px;}.diff-card.before{background:var(--s2);}.diff-card.after{background:rgba(37,99,168,.04);}
+.diff-arrow-col{display:flex;align-items:center;justify-content:center;padding:0 18px;border-left:1px solid var(--br);border-right:1px solid var(--br);}
+.diff-sub{font-size:10px;color:var(--mu);margin-bottom:7px;font-family:'Noto Sans KR',sans-serif;}
+.diff-amount{font-family:'Bebas Neue',sans-serif;font-size:28px;line-height:1.1;}
+.diff-amount.before-amt{color:var(--mu);}.diff-amount.after-amt{color:var(--a);}
+.diff-badge{display:inline-block;margin-top:8px;font-family:'Noto Sans KR',sans-serif;font-size:11px;padding:3px 10px;border-radius:4px;}
+.diff-badge.plus{background:rgba(37,99,168,.1);color:var(--a);border:1px solid rgba(37,99,168,.2);}
+.diff-badge.minus{background:rgba(192,57,43,.1);color:var(--a3);border:1px solid rgba(192,57,43,.2);}
+.diff-badge.eq{background:rgba(37,99,168,.1);color:var(--a);border:1px solid rgba(37,99,168,.2);}
+.remarks-wrap{display:flex;flex-direction:column;gap:12px;}
+.rmk-section{background:var(--s1);border:1px solid var(--br);border-radius:12px;padding:16px 20px;box-shadow:0 1px 4px rgba(0,0,0,.05);}
+.rmk-ttl{font-size:12px;font-weight:700;color:var(--a);margin-bottom:9px;padding-bottom:7px;border-bottom:1px solid var(--br);}
+.rmk-list{list-style:none;display:flex;flex-direction:column;gap:4px;}
+.rmk-list li{font-size:12px;line-height:1.65;padding-left:14px;position:relative;}
+.rmk-list li::before{content:'*';position:absolute;left:0;color:var(--mu);}
+footer{max-width:1200px;margin:40px auto 0;padding:16px 24px;border-top:1px solid var(--br);font-family:'Noto Sans KR',sans-serif;font-size:10px;color:var(--di);display:flex;justify-content:space-between;}
+@media(max-width:700px){.chart-grid{grid-template-columns:1fr;}.cbox.wide{grid-column:auto;}.kpi{grid-template-columns:1fr 1fr!important;}.hdr{flex-direction:column;}.diff-grid{grid-template-columns:1fr;}.diff-arrow-col{display:none;}.hc-wrap{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="tab-nav"><div class="tab-nav-inner">
+  <span style="padding:15px 0;font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--a);letter-spacing:.05em;">THE SMC</span>
+</div></div>
+
+<div class="tab-content">
+<div class="hdr">
+  <div>
+    <div><span class="tag tg-a">SALARY DASHBOARD</span><span class="tag tg-b">● CONFIRMED</span></div>
+    <h1>더에스엠씨<br><span>2026-05 급여 확정보고</span></h1>
+  </div>
+  <div class="hdr-right">기준월: 2026-05<br>인원: 517명<br>생성: 2026.05.27 05:16<br><span class="hdr-total">18억 5,921만원</span></div>
+</div>
+
+<div class="exec"><div class="exec-lbl">EXECUTIVE SUMMARY</div><div><p class="exec-line">당월 지급 총액 18억 5,921만원으로 전월 대비 ▼2.2% 감소</p><div class="exec-gap"></div><p class="exec-line">입사 8명 · 퇴사 18명 = 변동 -10명</p><p class="exec-line">전월 대비 인원수 감소로 인해 지급 금액 감소</p><p class="exec-line">콘텐츠커머스 25년 하반기 잔여 성과급 지급 완료 (5/10)</p></div></div>
+
+<div class="sec">
+  <div class="sec-hd"><span class="sec-num">01</span><span class="sec-ttl">주요 지표</span></div>
+  <div class="kpi" style="grid-template-columns:repeat(6,1fr);">
+    <div class="kcard"><div class="k-lbl">확정 지급 총액</div><div class="k-val" style="font-size:17px;">18억 5,921만원</div><div class="k-delta dn">전월 19억 157만원 (▼2.2%)</div><div class="k-delta dn" style="margin-top:2px">전년 20억 7,563만원 (▼10.4%)</div></div>
+    <div class="kcard"><div class="k-lbl">지급 인원</div><div class="k-val">517<small>명</small></div><div class="k-delta dn">전월 537명 (-20명)</div><div class="k-delta dn" style="margin-top:2px">전년 541명 (-24명)</div></div>
+    <div class="kcard"><div class="k-lbl">인당 평균 지급액</div><div class="k-val" style="font-size:17px;">360만원</div><div class="k-delta up">전월 354만원 (▲1.6%)</div><div class="k-delta dn" style="margin-top:2px">전년 384만원 (▼6.3%)</div></div>
+    <div class="kcard"><div class="k-lbl">고정급여</div><div class="k-val" style="font-size:17px;">18억 1,362만원</div><div class="k-delta dn">전월 18억 5,515만원 (▼2.2%)</div></div>
+    <div class="kcard"><div class="k-lbl">수당 (변동급여)</div><div class="k-val">1,503만원</div><div class="k-delta dn">전월 2,417만원 (▼37.8%)</div></div>
+    <div class="kcard"><div class="k-lbl">성과급</div><div class="k-val">3,056만원</div><div class="k-delta up">전월 2,225만원 (▲37.4%)</div></div>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-hd"><span class="sec-num">02</span><span class="sec-ttl">사전 → 확정 변동 내역</span></div>
+  <div class="diff-grid">
+    <div class="diff-card before"><div class="diff-sub">PRELIMINARY · 사전보고</div><div class="diff-amount before-amt">18억 5,921만원</div></div>
+    <div class="diff-arrow-col"><div style="text-align:center"><div style="font-size:20px;color:var(--mu)">→</div><div style="font-size:10px;color:var(--mu);margin-top:4px">차액</div><div style="font-size:12px;color:var(--a);font-weight:600">+0원</div></div></div>
+    <div class="diff-card after"><div class="diff-sub">CONFIRMED · 확정보고</div><div class="diff-amount after-amt">18억 5,921만원</div><span class="diff-badge eq">사전=확정 (변동 없음)</span></div>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-hd"><span class="sec-num">03</span><span class="sec-ttl">당월 특이사항</span></div>
+  <div class="remarks-wrap"><div class="rmk-section"><div class="rmk-ttl">당월 특이사항</div><ul class="rmk-list"><li>육아휴직 : 광사1본부 이다혜AM, 데이드 이은혜M, 경영부문 김아영AM</li><li>소셜엠씨 기획 2실 1팀 김연우 외 1명 오뚜기 프로젝트 이슈로 휴일근무수당 고정 지급 (26년 1월-12월)</li><li>5/1 휴일 근무 인원 1.5배 가산하여 휴일근무수당 지급</li><li>재무본부 박민정AM 육아 휴직으로 인한 단축업무부담금 대상자 복직으로 인해 당월까지만 지급</li><li>광사1본부 이다혜AM 육아 휴직으로 인한 단축업무부담금 적용 완료 (1명, 월 40만원)</li><li>콘텐츠커머스 25년 하반기 성과급 추가 지급액 5/10 기지급 완료, 당월 급여에 기지급금으로 반영 완료</li><li>6년차 리프레시 휴가비 선급금 당월 급여로 반영 (김소연M)</li><li>일학습병행 지원금 근로자 지급분 반영 (안중범, 임상희, 안승혜)</li><li>25년 건강보험료 정산액 고지분 분납액 2회차 반영 완료</li><li>조직운영본부 최나진 상무 인센계약에 따른 특별상여금 4회차 지급</li><li>CEO Office 정병민M 창업진흥원 수주 특별 상여금 지급 (창진원 프로젝트 귀속)</li><li>데이드 민근영SM 입점사 심사위원 참가수당 특별 상여금 지급 (오래오래 함께가게 프로젝트 귀속)</li></ul></div><div class="rmk-section"><div class="rmk-ttl">사전보고 이후 변동내용</div><ul class="rmk-list"></ul></div></div>
+</div>
+
+<div class="sec">
+  <div class="sec-hd"><span class="sec-num">04</span><span class="sec-ttl">시각화 차트</span></div>
+  <div class="chart-grid">
+    <div class="cbox" style="display:flex;flex-direction:column;height:380px"><div class="c-lbl">사업부별 총급여 비중</div><div id="cDept" style="flex:1;min-height:0;position:relative;overflow:hidden"></div></div>
+    <div class="cbox" style="display:flex;flex-direction:column;height:380px"><div class="c-lbl">사업부별 인당 평균 급여</div><canvas id="cAvgSal" style="flex:1;min-height:0"></canvas></div>
+    <div class="cbox wide">
+      <div class="c-lbl">월별 재직 인원 추이 (25년 9월~)</div>
+      <div class="hc-wrap">
+        <div class="hc-table-wrap">
+          <table>
+            <thead><tr><th>사업부</th><th>인원</th></tr></thead>
+            <tbody>
+              <tr><td>소셜</td><td>86</td></tr><tr><td>데이드</td><td>47</td></tr><tr><td>브그</td><td>35</td></tr><tr><td>공공</td><td>22</td></tr><tr><td>광사1본</td><td>52</td></tr><tr><td>광사2본</td><td>47</td></tr><tr><td>BX</td><td>17</td></tr><tr><td>세토</td><td>24</td></tr><tr><td>콘커</td><td>9</td></tr><tr><td>미전</td><td>31</td></tr><tr><td>팀민트</td><td>62</td></tr><tr><td>AI Studio</td><td>8</td></tr><tr><td>랩스</td><td>14</td></tr><tr><td>쇼츠비</td><td>3</td></tr><tr><td>경영부문</td><td>52</td></tr><tr><td>CEO Office</td><td>4</td></tr><tr><td>이사회</td><td>3</td></tr><tr><td>경영임원</td><td>1</td></tr>
+              <tr style="border-top:2px solid var(--br);font-weight:700;background:var(--s2)">
+                <td style="color:var(--tx)">합 계</td>
+                <td style="text-align:right;color:var(--a)">517명</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="hc-chart-wrap"><canvas id="cHead"></canvas></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-hd"><span class="sec-num">05</span><span class="sec-ttl">사업부별 급여 현황</span></div>
+  <div class="tcard"><div class="tcard-scroll">
+    <table style="table-layout:fixed;width:100%">
+      <thead>
+        <tr>
+          <th rowspan="2" style="width:7%">사업부</th>
+          <th rowspan="2" style="width:5%;text-align:center">인원</th>
+          <th rowspan="2" style="width:4%;text-align:center">휴직</th>
+          <th rowspan="2" style="width:11%;text-align:right">총급여 (원)</th>
+          <th rowspan="2" style="width:5%;text-align:center">비중</th>
+          <th rowspan="2" style="width:8%;text-align:right">인당평균</th>
+          <th colspan="5" style="text-align:center;color:var(--a);font-weight:700;border-bottom:1px solid var(--br)">직책별 평균</th>
+        </tr>
+        <tr>
+          <th style="width:10%;text-align:center">D</th>
+          <th style="width:10%;text-align:center">SM</th>
+          <th style="width:10%;text-align:center">M</th>
+          <th style="width:10%;text-align:center">AM</th>
+          <th style="width:10%;text-align:center">P</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>소셜</td><td style="text-align:center">86명</td><td style="text-align:center;color:var(--di)">–</td><td style="text-align:right">270,977,700</td><td style="text-align:center">14.6%</td><td style="text-align:right">326만</td><td style="text-align:center;font-size:10px">1,558만<br><small>(1명)</small></td><td style="text-align:center;font-size:10px">494만<br><small>(7명)</small></td><td style="text-align:center;font-size:10px">488만<br><small>(13명)</small></td><td style="text-align:center;font-size:10px">396만<br><small>(13명)</small></td><td style="text-align:center;font-size:10px">261만<br><small>(52명)</small></td></tr><tr><td>데이드</td><td style="text-align:center">47명</td><td style="text-align:center;color:var(--a3)"><b>1명</b></td><td style="text-align:right">167,198,770</td><td style="text-align:center">9.0%</td><td style="text-align:right">364만</td><td style="text-align:center;font-size:10px">1,667만<br><small>(1명)</small></td><td style="text-align:center;font-size:10px">715만<br><small>(2명)</small></td><td style="text-align:center;font-size:10px">439만<br><small>(5명)</small></td><td style="text-align:center;font-size:10px">393만<br><small>(14명)</small></td><td style="text-align:center;font-size:10px">280만<br><small>(26명)</small></td></tr><tr><td>브그</td><td style="text-align:center">35명</td><td style="text-align:center;color:var(--di)">–</td><td style="text-align:right">119,951,460</td><td style="text-align:center">6.5%</td><td style="text-align:right">338만</td><td style="text-align:center;font-size:10px">1,083만<br><small>(1명)</small></td><td style="text-align:center;font-size:10px">1,000만<br><small>(1명)</small></td><td style="text-align:center;font-size:10px">518만<br><small>(3명)</small></td><td style="text-align:center;font-size:10px">371만<br><small>(12명)</small></td><td style="text-align:center;font-size:10px">247만<br><small>(18명)</small></td></tr><tr><td>공공</td><td style="text-align:center">22명</td><td style="text-align:center;color:var(--di)">–</td><td style="text-align:right">69,568,980</td><td style="text-align:center">3.7%</td><td style="text-align:right">337만</td><td style="text-align:center;font-size:10px">–</td><td style="text-align:center;font-size:10px">625만<br><small>(1명)</small></td><td style="text-align:center;font-size:10px">368만<br><small>(5명)</small></td><td style="text-align:center;font-size:10px">332만<br><small>(7명)</small></td><td style="text-align:center;font-size:10px">249만<br><small>(9명)</small></td></tr><tr><td>광사1본</td><td style="text-align:center">52명</td><td style="text-align:center;color:var(--a3)"><b>1명</b></td><td style="text-align:right">172,970,610</td><td style="text-align:center">9.3%</td><td style="text-align:right">331만</td><td style="text-align:center;font-size:10px">–</td><td style="text-align:center;font-size:10px">1,026만<br><small>(2명)</small></td><td style="text-align:center;font-size:10px">420만<br><small>(8명)</small></td><td style="text-align:center;font-size:10px">345만<br><small>(12명)</small></td><td style="text-align:center;font-size:10px">283만<br><small>(31명)</small></td></tr><tr><td>광사2본</td><td style="text-align:center">47명</td><td style="text-align:center;color:var(--di)">–</td><td style="text-align:right">165,514,870</td><td style="text-align:center">8.9%</td><td style="text-align:right">352만</td><td style="text-align:center;font-size:10px">854만<br><small>(1명)</small></td><td style="text-align:center;font-size:10px">654만<br><small>(2명)</small></td><td style="text-align:center;font-size:10px">458만<br><small>(5명)</small></td><td style="text-align:center;font-size:10px">370만<br><small>(14명)</small></td><td style="text-align:center;font-size:10px">291만<br><small>(25명)</small></td></tr><tr><td>BX</td><td style="text-align:center">17명</td><td style="text-align:center;color:var(--di)">–</td><td style="text-align:right">62,736,720</td><td style="text-align:center">3.4%</td><td style="text-align:right">369만</td><td style="text-align:center;font-size:10px">–</td><td style="text-align:center;font-size:10px">608만<br><small>(2명)</small></td><td style="text-align:center;font-size:10px">428만<br><small>(4명)</small></td><td style="text-align:center;font-size:10px">336만<br><small>(5명)</small></td><td style="text-align:center;font-size:10px">283만<br><small>(6명)</small></td></tr><tr><td>세토</td><td style="text-align:center">24명</td><td style="text-align:center;color:var(--di)">–</td><td style="text-align:right">70,537,700</td><td style="text-align:center">3.8%</td><td style="text-align:right">333만</td><td style="text-align:center;font-size:10px">833만<br><small>(1명)</small></td><td style="text-align:center;font-size:10px">550만<br><small>(2명)</small></td><td style="text-align:center;font-size:10px">–</td><td style="text-align:center;font-size:10px">336만<br><small>(6명)</small></td><td style="text-align:center;font-size:10px">260만<br><small>(14명)</small></td></tr><tr><td>콘커</td><td style="text-align:center">9명</td><td style="text-align:center;color:var(--di)">–</td><td style="text-align:right">37,441,503</td><td style="text-align:center">2.0%</td><td style="text-align:right">400만</td><td style="text-align:center;font-size:10px">–</td><td style="text-align:center;font-size:10px">590만<br><small>(2명)</small></td><td style="text-align:center;font-size:10px">458만<br><small>(1명)</small></td><td style="text-align:center;font-size:10px">364만<br><small>(3명)</small></td><td style="text-align:center;font-size:10px">281만<br><small>(3명)</small></td></tr><tr><td>미전</td><td style="text-align:center">31명</td><td style="text-align:center;color:var(--di)">–</td><td style="text-align:right">123,375,110</td><td style="text-align:center">6.6%</td><td style="text-align:right">388만</td><td style="text-align:center;font-size:10px">1,500만<br><small>(1명)</small></td><td style="text-align:center;font-size:10px">721만<br><small>(2명)</small></td><td style="text-align:center;font-size:10px">533만<br><small>(3명)</small></td><td style="text-align:center;font-size:10px">403만<br><small>(3명)</small></td><td style="text-align:center;font-size:10px">281만<br><small>(22명)</small></td></tr><tr><td>팀민트</td><td style="text-align:center">62명</td><td style="text-align:center;color:var(--di)">–</td><td style="text-align:right">238,112,940</td><td style="text-align:center">12.8%</td><td style="text-align:right">389만</td><td style="text-align:center;font-size:10px">1,021만<br><small>(4명)</small></td><td style="text-align:center;font-size:10px">625만<br><small>(1명)</small></td><td style="text-align:center;font-size:10px">457만<br><small>(9명)</small></td><td style="text-align:center;font-size:10px">458만<br><small>(3명)</small></td><td style="text-align:center;font-size:10px">310만<br><small>(45명)</small></td></tr><tr><td>AI Studio</td><td style="text-align:center">8명</td><td style="text-align:center;color:var(--di)">–</td><td style="text-align:right">26,379,920</td><td style="text-align:center">1.4%</td><td style="text-align:right">332만</td><td style="text-align:center;font-size:10px">–</td><td style="text-align:center;font-size:10px">500만<br><small>(1명)</small></td><td style="text-align:center;font-size:10px">–</td><td style="text-align:center;font-size:10px">317만<br><small>(2명)</small></td><td style="text-align:center;font-size:10px">304만<br><small>(5명)</small></td></tr><tr><td>랩스</td><td style="text-align:center">14명</td><td style="text-align:center;color:var(--di)">–</td><td style="text-align:right">61,250,050</td><td style="text-align:center">3.3%</td><td style="text-align:right">438만</td><td style="text-align:center;font-size:10px">–</td><td style="text-align:center;font-size:10px">850만<br><small>(2명)</small></td><td style="text-align:center;font-size:10px">598만<br><small>(1명)</small></td><td style="text-align:center;font-size:10px">395만<br><small>(7명)</small></td><td style="text-align:center;font-size:10px">298만<br><small>(4명)</small></td></tr><tr><td>쇼츠비</td><td style="text-align:center">3명</td><td style="text-align:center;color:var(--di)">–</td><td style="text-align:right">10,833,340</td><td style="text-align:center">0.6%</td><td style="text-align:right">361만</td><td style="text-align:center;font-size:10px">–</td><td style="text-align:center;font-size:10px">–</td><td style="text-align:center;font-size:10px">417만<br><small>(1명)</small></td><td style="text-align:center;font-size:10px">–</td><td style="text-align:center;font-size:10px">333만<br><small>(2명)</small></td></tr><tr><td>경영부문</td><td style="text-align:center">52명</td><td style="text-align:center;color:var(--a3)"><b>1명</b></td><td style="text-align:right">208,572,450</td><td style="text-align:center">11.2%</td><td style="text-align:right">376만</td><td style="text-align:center;font-size:10px">531만<br><small>(3명)</small></td><td style="text-align:center;font-size:10px">750만<br><small>(1명)</small></td><td style="text-align:center;font-size:10px">512만<br><small>(7명)</small></td><td style="text-align:center;font-size:10px">308만<br><small>(12명)</small></td><td style="text-align:center;font-size:10px">300만<br><small>(30명)</small></td></tr><tr><td>CEO Office</td><td style="text-align:center">4명</td><td style="text-align:center;color:var(--di)">–</td><td style="text-align:right">20,539,565</td><td style="text-align:center">1.1%</td><td style="text-align:right">419만</td><td style="text-align:center;font-size:10px">–</td><td style="text-align:center;font-size:10px">–</td><td style="text-align:center;font-size:10px">550만<br><small>(2명)</small></td><td style="text-align:center;font-size:10px">333만<br><small>(1명)</small></td><td style="text-align:center;font-size:10px">242만<br><small>(1명)</small></td></tr><tr><td>이사회</td><td style="text-align:center">3명</td><td style="text-align:center;color:var(--di)">–</td><td style="text-align:right">5,000,000</td><td style="text-align:center">0.3%</td><td style="text-align:right">167만</td><td style="text-align:center;font-size:10px">171만<br><small>(3명)</small></td><td style="text-align:center;font-size:10px">–</td><td style="text-align:center;font-size:10px">–</td><td style="text-align:center;font-size:10px">–</td><td style="text-align:center;font-size:10px">–</td></tr><tr><td>경영임원</td><td style="text-align:center">1명</td><td style="text-align:center;color:var(--di)">–</td><td style="text-align:right">28,250,000</td><td style="text-align:center">1.5%</td><td style="text-align:right">2,825만</td><td style="text-align:center;font-size:10px">2,825만<br><small>(1명)</small></td><td style="text-align:center;font-size:10px">–</td><td style="text-align:center;font-size:10px">–</td><td style="text-align:center;font-size:10px">–</td><td style="text-align:center;font-size:10px">–</td></tr>
+        <tr class="cur"><td style="height:52px">합 계</td><td style="height:52px;text-align:center">517명</td><td style="height:52px;text-align:center;color:var(--a3)"><b>3명</b></td><td style="height:52px;text-align:right">1,859,211,688</td><td style="height:52px;text-align:center">100%</td><td style="height:52px;text-align:right">359만원</td><td style="height:52px">–</td><td style="height:52px">–</td><td style="height:52px">–</td><td style="height:52px">–</td><td style="height:52px">–</td></tr>
+      </tbody>
+    </table>
+  </div></div>
+</div>
+</div>
+
+<footer>
+  <span>© 더에스엠씨 급여 대시보드 · 자동생성 by Colab</span>
+  <span>2026-05 · 517명 · 18억 5,921만원 · 2026.05.26 09:57</span>
+</footer>
+
+<script>
+var deptNamesShort=["소셜", "데이드", "브그", "공공", "광사1본", "광사2본", "BX", "세토", "콘커", "미전", "팀민트", "AI Studio", "랩스", "쇼츠비", "경영부문", "CEO Office", "이사회"];
+var deptNamesFull=["소셜엠씨", "데이드", "브랜드그로스", "공공사업부", "광고사업 1본부", "광고사업 2본부", "BX본부", "세마리토끼", "콘텐츠커머스사업부", "미래전략본부", "팀민트", "AI Studio", "AI Labs", "쇼츠비", "경영부문", "CEO Office", "이사회"];
+var deptTotals=[270977700, 167198770, 119951460, 69568980, 172970610, 165514870, 62736720, 70537700, 37441503, 123375110, 238112940, 26379920, 61250050, 10833340, 208572450, 20539565, 5000000];
+var totalPay=1859211688;
+var avgNames=["소셜", "데이드", "브그", "공공", "광사1본", "광사2본", "BX", "세토", "콘커", "미전", "팀민트", "AI Studio", "랩스", "쇼츠비", "경영부문", "CEO Office", "이사회"];
+var avgVals=[326, 364, 338, 337, 331, 352, 369, 333, 400, 388, 389, 332, 438, 361, 376, 419, 167];
+var hcLabels=["25.9", "25.10", "25.11", "25.12", "26.1", "26.2", "26.3", "26.4", "26.5"];
+var hcValues=[561, 546, 561, 545, 515, 523, 531, 537, 517];
+var monthlyHR={"25.9": [], "25.10": [], "25.11": [], "25.12": [], "26.1": [{"dept": "데이드", "joined": 0, "left": 1}, {"dept": "브그", "joined": 1, "left": 1}, {"dept": "소셜", "joined": 4, "left": 3}, {"dept": "팀민트", "joined": 1, "left": 2}, {"dept": "공공", "joined": 0, "left": 1}, {"dept": "미전", "joined": 1, "left": 0}, {"dept": "Compliance", "joined": 3, "left": 0}, {"dept": "광사", "joined": 1, "left": 1}, {"dept": "세토", "joined": 3, "left": 2}, {"dept": "랩스", "joined": 0, "left": 1}], "26.2": [{"dept": "데이드", "joined": 1, "left": 2}, {"dept": "브그", "joined": 8, "left": 1}, {"dept": "소셜", "joined": 6, "left": 8}, {"dept": "팀민트", "joined": 0, "left": 1}, {"dept": "공공", "joined": 0, "left": 3}, {"dept": "Compliance", "joined": 1, "left": 1}, {"dept": "AI Studio", "joined": 0, "left": 1}, {"dept": "광사", "joined": 1, "left": 2}, {"dept": "세토", "joined": 3, "left": 1}, {"dept": "콘커", "joined": 0, "left": 1}, {"dept": "경영지원", "joined": 1, "left": 1}], "26.3": [{"dept": "데이드", "joined": 5, "left": 2}, {"dept": "브그", "joined": 1, "left": 2}, {"dept": "소셜", "joined": 5, "left": 0}, {"dept": "팀민트", "joined": 4, "left": 2}, {"dept": "공공", "joined": 2, "left": 2}, {"dept": "미전", "joined": 4, "left": 0}, {"dept": "Compliance", "joined": 1, "left": 4}, {"dept": "AI Studio", "joined": 1, "left": 0}, {"dept": "광사", "joined": 3, "left": 1}, {"dept": "콘커", "joined": 1, "left": 0}, {"dept": "경영지원", "joined": 1, "left": 0}, {"dept": "COO Office", "joined": 0, "left": 1}, {"dept": "CEO Office", "joined": 1, "left": 0}, {"dept": "랩스", "joined": 0, "left": 1}], "26.4": [{"dept": "데이드", "joined": 1, "left": 6}, {"dept": "브그", "joined": 1, "left": 2}, {"dept": "소셜", "joined": 4, "left": 7}, {"dept": "공공", "joined": 0, "left": 1}, {"dept": "미전", "joined": 2, "left": 1}, {"dept": "랩스", "joined": 0, "left": 2}, {"dept": "쇼츠비", "joined": 1, "left": 0}, {"dept": "광사", "joined": 2, "left": 2}, {"dept": "경영부문", "joined": 4, "left": 4}, {"dept": "이사회", "joined": 2, "left": 0}], "26.5": [{"dept": "소셜", "joined": 4, "left": 1}, {"dept": "데이드", "joined": 2, "left": 5}, {"dept": "브그", "joined": 0, "left": 1}, {"dept": "공공", "joined": 1, "left": 2}, {"dept": "광사1본", "joined": 0, "left": 2}, {"dept": "광사2본", "joined": 0, "left": 1}, {"dept": "세토", "joined": 0, "left": 1}, {"dept": "팀민트", "joined": 0, "left": 4}, {"dept": "AI Studio", "joined": 0, "left": 1}, {"dept": "경영부문", "joined": 1, "left": 0}]};
+
+var G='rgba(0,0,0,0.06)';
+var COLORS=["#2563a8", "#5b8fc7", "#8bb3d9", "#3d7a5e", "#6aaa8c", "#a0c8b5", "#7a5c3d", "#a88060", "#c4a882", "#4a5568", "#718096", "#a0aec0", "#cbd5e0", "#f4c542", "#e07b39", "#9b59b6"];
+
+(function(){
+  var container=document.getElementById('cDept');
+  var canvas=document.createElement('canvas');
+  canvas.style.cssText='position:absolute;top:0;left:0;width:100%;height:100%';
+  container.appendChild(canvas);
+  function tilemap(items,x,y,w,h){
+    if(!items.length)return[];
+    if(items.length===1)return[{d:items[0],x:x,y:y,w:w,h:h}];
+    var total=items.reduce(function(s,d){return s+d.value;},0);
+    var half=total/2,acc=0,si=0;
+    for(var i=0;i<items.length;i++){acc+=items[i].value;if(acc>=half){si=i+1;break;}}
+    si=Math.max(1,Math.min(si,items.length-1));
+    var a=items.slice(0,si),b=items.slice(si);
+    var frac=a.reduce(function(s,d){return s+d.value;},0)/total;
+    var res=[];
+    if(w>=h){res=res.concat(tilemap(a,x,y,w*frac,h));res=res.concat(tilemap(b,x+w*frac,y,w*(1-frac),h));}
+    else{res=res.concat(tilemap(a,x,y,w,h*frac));res=res.concat(tilemap(b,x,y+h*frac,w,h*(1-frac)));}
+    return res;
+  }
+  var lastRects=[];
+  function draw(){
+    var W=container.clientWidth||400,H=container.clientHeight||340;
+    canvas.width=W;canvas.height=H;
+    var ctx=canvas.getContext('2d');ctx.clearRect(0,0,W,H);
+    var data=deptNamesShort.map(function(nm,i){return{name:nm,full:deptNamesFull[i],value:deptTotals[i],origIdx:i};}).sort(function(a,b){return b.value-a.value;});
+    var total=data.reduce(function(s,d){return s+d.value;},0);
+    var rects=tilemap(data,2,2,W-4,H-4);
+    lastRects=rects.map(function(r){return{r:r,total:total};});
+    rects.forEach(function(r){
+      var pct=r.d.value/total*100,rx=r.x+1,ry=r.y+1,rw=r.w-2,rh=r.h-2;
+      if(rw<=0||rh<=0)return;
+      ctx.fillStyle=COLORS[r.d.origIdx%COLORS.length];
+      var rad=Math.min(4,rw/2,rh/2);
+      ctx.beginPath();ctx.moveTo(rx+rad,ry);ctx.lineTo(rx+rw-rad,ry);ctx.arcTo(rx+rw,ry,rx+rw,ry+rad,rad);ctx.lineTo(rx+rw,ry+rh-rad);ctx.arcTo(rx+rw,ry+rh,rx+rw-rad,ry+rh,rad);ctx.lineTo(rx+rad,ry+rh);ctx.arcTo(rx,ry+rh,rx,ry+rh-rad,rad);ctx.lineTo(rx,ry+rad);ctx.arcTo(rx,ry,rx+rad,ry,rad);ctx.closePath();ctx.fill();
+      if(rw<32||rh<24)return;
+      var px=rx+7,py=ry+8;ctx.fillStyle='#fff';ctx.textBaseline='top';
+      var fs1=rw>80?11:9;ctx.font='bold '+fs1+"px 'Malgun Gothic','맑은 고딕','Noto Sans KR',sans-serif";
+      var nm=r.d.name;while(nm.length>2&&ctx.measureText(nm).width>rw-14)nm=nm.slice(0,-1);if(nm!==r.d.name)nm+='..';ctx.fillText(nm,px,py);
+      if(rh<48)return;ctx.font='bold '+(rw>80?17:12)+"px 'Malgun Gothic','맑은 고딕','Noto Sans KR',sans-serif";ctx.fillText((r.d.value/1e8).toFixed(2)+'억',px,py+fs1+5);
+      if(rh<72)return;ctx.font="10px 'Malgun Gothic','맑은 고딕','Noto Sans KR',sans-serif";ctx.fillStyle='rgba(255,255,255,0.75)';ctx.fillText(pct.toFixed(2)+'%',px,py+fs1+5+(rw>80?17:12)+3);
+    });
+  }
+  var tt=document.createElement('div');tt.style.cssText='position:fixed;background:rgba(26,35,50,0.92);color:#fff;padding:8px 12px;border-radius:8px;font-size:12px;pointer-events:none;display:none;z-index:9999;line-height:1.7;box-shadow:0 4px 12px rgba(0,0,0,.2)';document.body.appendChild(tt);
+  canvas.addEventListener('mousemove',function(e){var rc=canvas.getBoundingClientRect(),mx=e.clientX-rc.left,my=e.clientY-rc.top,hit=null;lastRects.forEach(function(item){var r=item.r;if(mx>=r.x&&mx<=r.x+r.w&&my>=r.y&&my<=r.y+r.h)hit=item;});if(hit){tt.innerHTML='<strong>'+hit.r.d.full+'</strong><br>'+(hit.r.d.value/1e8).toFixed(2)+'억원 ('+(hit.r.d.value/hit.total*100).toFixed(2)+'%)';tt.style.display='block';tt.style.left=(e.clientX+14)+'px';tt.style.top=(e.clientY-10)+'px';canvas.style.cursor='pointer';}else{tt.style.display='none';canvas.style.cursor='default';}}); canvas.addEventListener('mouseleave',function(){tt.style.display='none';});
+  function tryDraw(){if(container.clientWidth>0&&container.clientHeight>0)draw();else requestAnimationFrame(tryDraw);}tryDraw();new ResizeObserver(draw).observe(container);
+})();
+
+(function(){
+  var cv=document.getElementById('cAvgSal');
+  var tt=document.createElement('div');
+  tt.style.cssText='position:fixed;background:rgba(26,35,50,0.92);color:#fff;padding:6px 10px;border-radius:6px;font-size:11px;pointer-events:none;display:none;z-index:9999;';
+  document.body.appendChild(tt);
+  var brs=[];
+  function draw(){
+    var W=cv.offsetWidth,H=cv.offsetHeight;cv.width=W;cv.height=H;
+    var ctx=cv.getContext('2d'),pl=44,pr=10,pt=10,pb=52,cw=W-pl-pr,ch=H-pt-pb;
+    var n=avgVals.length,maxV=Math.max.apply(null,avgVals)*1.15;
+    var gap=cw/n,bw=Math.max(6,gap*0.6);
+    ctx.strokeStyle='rgba(0,0,0,0.06)';ctx.lineWidth=1;
+    for(var yi=0;yi<=4;yi++){
+      var yv=maxV/4*yi,yp=pt+ch-ch*yv/maxV;
+      ctx.beginPath();ctx.moveTo(pl,yp);ctx.lineTo(pl+cw,yp);ctx.stroke();
+      ctx.fillStyle='#5a6a7a';ctx.font="10px 'Noto Sans KR',sans-serif";ctx.textAlign='right';
+      ctx.fillText(Math.round(yv)+'만',pl-4,yp+4);
+    }
+    brs=[];
+    for(var i=0;i<n;i++){
+      var bh=ch*avgVals[i]/maxV,bx=pl+gap*i+(gap-bw)/2,by=pt+ch-bh;
+      var r2=Math.min(3,bw/2);
+      ctx.fillStyle=COLORS[i%COLORS.length];
+      ctx.beginPath();ctx.moveTo(bx+r2,by);ctx.lineTo(bx+bw-r2,by);ctx.arcTo(bx+bw,by,bx+bw,by+r2,r2);
+      ctx.lineTo(bx+bw,by+bh);ctx.lineTo(bx,by+bh);ctx.lineTo(bx,by+r2);ctx.arcTo(bx,by,bx+r2,by,r2);
+      ctx.closePath();ctx.fill();
+      brs.push({x:bx,y:by,w:bw,h:bh,nm:avgNames[i],val:avgVals[i]});
+      ctx.save();ctx.fillStyle='#5a6a7a';ctx.font="9px 'Noto Sans KR',sans-serif";ctx.textAlign='right';
+      ctx.translate(pl+gap*i+gap/2,pt+ch+8);ctx.rotate(-Math.PI/4);ctx.fillText(avgNames[i],0,0);ctx.restore();
+    }
+  }
+  cv.addEventListener('mousemove',function(e){
+    var rc=cv.getBoundingClientRect(),mx=e.clientX-rc.left,my=e.clientY-rc.top,hit=null;
+    brs.forEach(function(b){if(mx>=b.x&&mx<=b.x+b.w&&my>=b.y&&my<=b.y+b.h)hit=b;});
+    if(hit){tt.textContent=hit.nm+' '+hit.val.toLocaleString()+'만원';tt.style.display='block';tt.style.left=(e.clientX+10)+'px';tt.style.top=(e.clientY-28)+'px';}
+    else{tt.style.display='none';}
+  });
+  cv.addEventListener('mouseleave',function(){tt.style.display='none';});
+  function tryDraw(){if(cv.offsetWidth>0)draw();else requestAnimationFrame(tryDraw);}
+  tryDraw();new ResizeObserver(draw).observe(cv);
+})();
+
+(function(){
+  var chartCanvas=document.getElementById('cHead');
+  (function(){
+  var cv=document.getElementById('cHead');
+  var tt2=document.createElement('div');
+  tt2.style.cssText='position:fixed;background:rgba(26,35,50,0.95);color:#fff;padding:10px 14px;border-radius:8px;font-size:11px;pointer-events:none;display:none;z-index:9999;line-height:1.8;min-width:160px;box-shadow:0 4px 12px rgba(0,0,0,.2)';
+  document.body.appendChild(tt2);
+  var lpts=[];
+  function draw(){
+    var W=cv.offsetWidth,H=cv.offsetHeight||220;cv.width=W;cv.height=H;
+    var ctx=cv.getContext('2d'),pl=46,pr=16,pt=14,pb=28,cw=W-pl-pr,ch=H-pt-pb;
+    var n=hcValues.length;
+    var minV=Math.min.apply(null,hcValues),maxV=Math.max.apply(null,hcValues);
+    var span=Math.max(maxV-minV,10),padV=span*0.2,lo=minV-padV,hi=maxV+padV;
+    ctx.strokeStyle='rgba(0,0,0,0.06)';ctx.lineWidth=1;
+    for(var yi=0;yi<=4;yi++){
+      var yv=lo+(hi-lo)/4*yi,yp=pt+ch-ch*(yv-lo)/(hi-lo);
+      ctx.beginPath();ctx.moveTo(pl,yp);ctx.lineTo(pl+cw,yp);ctx.stroke();
+      ctx.fillStyle='#5a6a7a';ctx.font="10px 'Noto Sans KR',sans-serif";ctx.textAlign='right';
+      ctx.fillText(Math.round(yv)+'명',pl-4,yp+4);
+    }
+    lpts=[];
+    for(var i=0;i<n;i++){
+      var px=pl+(n===1?cw/2:cw/(n-1)*i),py=pt+ch-ch*(hcValues[i]-lo)/(hi-lo);
+      lpts.push({x:px,y:py,i:i});
+      ctx.fillStyle='#5a6a7a';ctx.font="10px 'Noto Sans KR',sans-serif";ctx.textAlign='center';
+      ctx.fillText(hcLabels[i],px,pt+ch+pb-2);
+    }
+    ctx.beginPath();ctx.moveTo(lpts[0].x,pt+ch);
+    for(var i=0;i<lpts.length;i++)ctx.lineTo(lpts[i].x,lpts[i].y);
+    ctx.lineTo(lpts[lpts.length-1].x,pt+ch);ctx.closePath();
+    ctx.fillStyle='rgba(37,99,168,0.07)';ctx.fill();
+    ctx.beginPath();ctx.moveTo(lpts[0].x,lpts[0].y);
+    for(var i=1;i<lpts.length;i++){
+      var cpx1=lpts[i-1].x+(lpts[i].x-lpts[i-1].x)/3,cpx2=lpts[i].x-(lpts[i].x-lpts[i-1].x)/3;
+      ctx.bezierCurveTo(cpx1,lpts[i-1].y,cpx2,lpts[i].y,lpts[i].x,lpts[i].y);
+    }
+    ctx.strokeStyle='#2563a8';ctx.lineWidth=2;ctx.stroke();
+    lpts.forEach(function(p){
+      ctx.beginPath();ctx.arc(p.x,p.y,5,0,Math.PI*2);
+      ctx.fillStyle='#2563a8';ctx.fill();
+      ctx.strokeStyle='#fff';ctx.lineWidth=1.5;ctx.stroke();
+    });
+  }
+  cv.addEventListener('mousemove',function(e){
+    var rc=cv.getBoundingClientRect(),mx=e.clientX-rc.left,hit=null,minD=9999;
+    lpts.forEach(function(p){var d=Math.abs(p.x-mx);if(d<minD){minD=d;hit=p;}});
+    if(hit&&minD<40){
+      var ym=hcLabels[hit.i],depts=monthlyHR[ym]||[];
+      var h2='<div style="font-weight:700;font-size:12px;margin-bottom:4px">'+ym+' 재직인원: '+hcValues[hit.i]+'명</div>';
+      var hl=depts.filter(function(d){return d.joined>0||d.left>0;});
+      if(hl.length>0){
+        h2+='<div style="color:#a0aec0;font-size:10px;margin:4px 0 2px;border-top:1px solid rgba(255,255,255,.2);padding-top:5px">사업부별 입/퇴사</div>';
+        hl.forEach(function(d){h2+='<div style="font-size:10px"><span style="color:#8bb3d9">'+d.dept+'</span> 입<b style="color:#6aaa8c">'+d.joined+'</b> 퇴<b style="color:#e07b39">'+d.left+'</b></div>';});
+      }
+      tt2.innerHTML=h2;tt2.style.display='block';
+      var tx=e.clientX+14,ty=e.clientY-10;
+      if(tx+210>window.innerWidth)tx=e.clientX-220;
+      tt2.style.left=tx+'px';tt2.style.top=ty+'px';
+    } else{tt2.style.display='none';}
+  });
+  cv.addEventListener('mouseleave',function(){tt2.style.display='none';});
+  function tryDraw(){if(cv.offsetWidth>0)draw();else requestAnimationFrame(tryDraw);}
+  tryDraw();new ResizeObserver(cv,draw).observe(cv);
+})();
+})();
+</script>
+</body></html>
