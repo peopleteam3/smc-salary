@@ -40,13 +40,13 @@ body{background:var(--bg);color:var(--tx);font-family:'Noto Sans KR',sans-serif;
 .cbox.wide{grid-column:1/-1;}
 .c-lbl{font-size:12px;color:var(--a);letter-spacing:.02em;margin-bottom:14px;font-weight:800;display:flex;align-items:center;gap:6px;}
 .c-lbl::before{content:"";display:inline-block;width:3px;height:14px;background:var(--a);border-radius:2px;flex-shrink:0;}
-.hc-wrap{display:grid;grid-template-columns:200px 1fr;gap:0;align-items:stretch;min-height:300px;}
+.hc-wrap{display:grid;grid-template-columns:200px 1fr;gap:0;align-items:stretch;}
 .hc-table-wrap{border-right:1px solid var(--br);padding-right:12px;}
 .hc-table-wrap table{width:100%;border-collapse:collapse;font-size:11px;}
 .hc-table-wrap th{background:var(--s2);padding:4px 6px;font-size:10px;color:var(--mu);text-align:left;}
 .hc-table-wrap td{padding:3px 6px;border-bottom:1px solid var(--s2);}
 .hc-table-wrap td:last-child{text-align:right;font-family:'Noto Sans KR',sans-serif;}
-.hc-chart-wrap{padding-left:14px;display:flex;flex-direction:column;flex:1;min-width:0;}
+.hc-chart-wrap{padding-left:14px;flex:1;min-width:0;}
 .tcard{background:var(--s1);border:1px solid var(--br);border-radius:12px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.05);}
 .tcard-scroll{overflow-x:auto;}
 table{width:100%;border-collapse:collapse;font-size:11px;}
@@ -161,19 +161,31 @@ footer{max-width:1200px;margin:40px auto 0;padding:16px 24px;border-top:1px soli
     <div class="cbox" style="display:flex;flex-direction:column;height:380px"><div class="c-lbl">사업부별 총급여 비중</div><div id="cDept" style="flex:1;min-height:0;position:relative;overflow:hidden"></div></div>
     <div class="cbox" style="display:flex;flex-direction:column;height:380px"><div class="c-lbl">사업부별 인당 평균 급여</div><canvas id="cAvgSal" style="flex:1;min-height:0;width:100%;height:100%"></canvas></div>
     <div class="cbox wide">
-      <div class="c-lbl">월별 재직 인원 추이</div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+        <div class="c-lbl" style="margin-bottom:0">월별 재직 인원 추이</div>
+        <select id="hcSelect" style="padding:5px 10px;font-size:12px;border:1px solid var(--br);border-radius:6px;background:#fff;color:var(--tx);font-family:'Noto Sans KR',sans-serif;cursor:pointer;outline:none;">
+          <option value="__all__">전체</option>
+          <option value="소셜">소셜</option><option value="데이드">데이드</option><option value="브그">브그</option><option value="공공">공공</option><option value="광사1본">광사1본</option><option value="광사2본">광사2본</option><option value="BX">BX</option><option value="세토">세토</option><option value="콘커">콘커</option><option value="미전">미전</option><option value="팀민트">팀민트</option><option value="AI Studio">AI Studio</option><option value="랩스">랩스</option><option value="쇼츠비">쇼츠비</option><option value="경영부문">경영부문</option><option value="CEO Office">CEO Office</option><option value="이사회">이사회</option><option value="경영임원">경영임원</option>
+        </select>
+      </div>
       <div class="hc-wrap">
-        <div class="hc-table-wrap">
+        <div class="hc-table-wrap" id="hcTable">
           <table>
             <thead><tr><th>사업부</th><th>인원</th></tr></thead>
             <tbody>
               <tr><td>소셜</td><td>86</td></tr><tr><td>데이드</td><td>47</td></tr><tr><td>브그</td><td>35</td></tr><tr><td>공공</td><td>22</td></tr><tr><td>광사1본</td><td>52</td></tr><tr><td>광사2본</td><td>47</td></tr><tr><td>BX</td><td>17</td></tr><tr><td>세토</td><td>24</td></tr><tr><td>콘커</td><td>9</td></tr><tr><td>미전</td><td>31</td></tr><tr><td>팀민트</td><td>62</td></tr><tr><td>AI Studio</td><td>8</td></tr><tr><td>랩스</td><td>14</td></tr><tr><td>쇼츠비</td><td>3</td></tr><tr><td>경영부문</td><td>52</td></tr><tr><td>CEO Office</td><td>4</td></tr><tr><td>이사회</td><td>3</td></tr><tr><td>경영임원</td><td>1</td></tr>
-              <tr style="border-top:2px solid var(--br);font-weight:700;background:var(--s2)"><td style="color:var(--tx)">합 계</td><td style="text-align:right;color:var(--a)">517명</td></tr>
+              <tr style="border-top:2px solid var(--br);font-weight:700;background:var(--s2)">
+                <td style="color:var(--tx)">합 계</td>
+                <td style="text-align:right;color:var(--a)">517명</td>
+              </tr>
             </tbody>
           </table>
         </div>
-        <div class="hc-chart-wrap"><canvas id="cHead" style="width:100%;display:block"></canvas></div>
+        <div class="hc-chart-wrap">
+          <canvas id="cHead" style="display:block;width:100%"></canvas>
+        </div>
       </div>
+    </div></div>
     </div>
   </div>
 </div>
@@ -220,15 +232,17 @@ var deptTotals=[270977700, 167198770, 119951460, 69568980, 172970610, 165514870,
 var totalPay=1859211688;
 var avgNames=["소셜", "데이드", "브그", "공공", "광사1본", "광사2본", "BX", "세토", "콘커", "미전", "팀민트", "AI Studio", "랩스", "쇼츠비", "경영부문", "CEO Office", "이사회"];
 var avgVals=[326, 364, 338, 337, 331, 352, 369, 333, 400, 388, 389, 332, 438, 361, 376, 419, 167];
-var hcLabels=["25.9", "25.10", "25.11", "25.12", "26.1", "26.2", "26.3", "26.4", "26.5"];
-var hcValues=[561, 546, 561, 545, 515, 523, 531, 537, 517];
+var hcLabels=["26.1", "26.2", "26.3", "26.4", "26.5"];
+var hcValues=[515, 523, 531, 537, 517];
+ 
 var monthlyHR={"25.9": [], "25.10": [], "25.11": [], "25.12": [], "26.1": [{"dept": "데이드", "joined": 0, "left": 1}, {"dept": "브그", "joined": 1, "left": 1}, {"dept": "소셜", "joined": 4, "left": 3}, {"dept": "팀민트", "joined": 1, "left": 2}, {"dept": "공공", "joined": 0, "left": 1}, {"dept": "미전", "joined": 1, "left": 0}, {"dept": "Compliance", "joined": 3, "left": 0}, {"dept": "광사", "joined": 1, "left": 1}, {"dept": "세토", "joined": 3, "left": 2}, {"dept": "랩스", "joined": 0, "left": 1}], "26.2": [{"dept": "데이드", "joined": 1, "left": 2}, {"dept": "브그", "joined": 8, "left": 1}, {"dept": "소셜", "joined": 6, "left": 8}, {"dept": "팀민트", "joined": 0, "left": 1}, {"dept": "공공", "joined": 0, "left": 3}, {"dept": "Compliance", "joined": 1, "left": 1}, {"dept": "AI Studio", "joined": 0, "left": 1}, {"dept": "광사", "joined": 1, "left": 2}, {"dept": "세토", "joined": 3, "left": 1}, {"dept": "콘커", "joined": 0, "left": 1}, {"dept": "경영지원", "joined": 1, "left": 1}], "26.3": [{"dept": "데이드", "joined": 5, "left": 2}, {"dept": "브그", "joined": 1, "left": 2}, {"dept": "소셜", "joined": 5, "left": 0}, {"dept": "팀민트", "joined": 4, "left": 2}, {"dept": "공공", "joined": 2, "left": 2}, {"dept": "미전", "joined": 4, "left": 0}, {"dept": "Compliance", "joined": 1, "left": 4}, {"dept": "AI Studio", "joined": 1, "left": 0}, {"dept": "광사", "joined": 3, "left": 1}, {"dept": "콘커", "joined": 1, "left": 0}, {"dept": "경영지원", "joined": 1, "left": 0}, {"dept": "COO Office", "joined": 0, "left": 1}, {"dept": "CEO Office", "joined": 1, "left": 0}, {"dept": "랩스", "joined": 0, "left": 1}], "26.4": [{"dept": "데이드", "joined": 1, "left": 6}, {"dept": "브그", "joined": 1, "left": 2}, {"dept": "소셜", "joined": 4, "left": 7}, {"dept": "공공", "joined": 0, "left": 1}, {"dept": "미전", "joined": 2, "left": 1}, {"dept": "랩스", "joined": 0, "left": 2}, {"dept": "쇼츠비", "joined": 1, "left": 0}, {"dept": "광사", "joined": 2, "left": 2}, {"dept": "경영부문", "joined": 4, "left": 4}, {"dept": "이사회", "joined": 2, "left": 0}], "26.5": [{"dept": "소셜", "joined": 4, "left": 1}, {"dept": "데이드", "joined": 2, "left": 5}, {"dept": "브그", "joined": 0, "left": 1}, {"dept": "공공", "joined": 1, "left": 2}, {"dept": "광사1본", "joined": 0, "left": 2}, {"dept": "광사2본", "joined": 0, "left": 1}, {"dept": "세토", "joined": 0, "left": 1}, {"dept": "팀민트", "joined": 0, "left": 4}, {"dept": "AI Studio", "joined": 0, "left": 1}, {"dept": "경영부문", "joined": 1, "left": 0}]};
- 
 var G='rgba(0,0,0,0.06)';
-var COLORS=["#2563a8", "#5b8fc7", "#8bb3d9", "#3d7a5e", "#6aaa8c", "#a0c8b5", "#7a5c3d", "#a88060", "#c4a882", "#4a5568", "#718096", "#a0aec0", "#cbd5e0", "#f4c542", "#e07b39", "#9b59b6"];
+var COLORS=['#2563a8','#5b8fc7','#8bb3d9','#3d7a5e','#6aaa8c','#a0c8b5','#7a5c3d','#a88060','#c4a882','#4a5568','#718096','#a0aec0','#cbd5e0','#f4c542','#e07b39','#9b59b6'];
  
+// ── 트리맵 ──
 (function(){
   var container=document.getElementById('cDept');
+  if(!container)return;
   var canvas=document.createElement('canvas');
   canvas.style.cssText='position:absolute;top:0;left:0;width:100%;height:100%';
   container.appendChild(canvas);
@@ -263,124 +277,166 @@ var COLORS=["#2563a8", "#5b8fc7", "#8bb3d9", "#3d7a5e", "#6aaa8c", "#a0c8b5", "#
       ctx.beginPath();ctx.moveTo(rx+rad,ry);ctx.lineTo(rx+rw-rad,ry);ctx.arcTo(rx+rw,ry,rx+rw,ry+rad,rad);ctx.lineTo(rx+rw,ry+rh-rad);ctx.arcTo(rx+rw,ry+rh,rx+rw-rad,ry+rh,rad);ctx.lineTo(rx+rad,ry+rh);ctx.arcTo(rx,ry+rh,rx,ry+rh-rad,rad);ctx.lineTo(rx,ry+rad);ctx.arcTo(rx,ry,rx+rad,ry,rad);ctx.closePath();ctx.fill();
       if(rw<32||rh<24)return;
       var px=rx+7,py=ry+8;ctx.fillStyle='#fff';ctx.textBaseline='top';
-      var fs1=rw>80?11:9;ctx.font='bold '+fs1+"px 'Malgun Gothic','맑은 고딕','Noto Sans KR',sans-serif";
+      var fs1=rw>80?11:9;ctx.font='bold '+fs1+"px 'Malgun Gothic','맑은 고딕',sans-serif";
       var nm=r.d.name;while(nm.length>2&&ctx.measureText(nm).width>rw-14)nm=nm.slice(0,-1);if(nm!==r.d.name)nm+='..';ctx.fillText(nm,px,py);
-      if(rh<48)return;ctx.font='bold '+(rw>80?17:12)+"px 'Malgun Gothic','맑은 고딕','Noto Sans KR',sans-serif";ctx.fillText((r.d.value/1e8).toFixed(2)+'억',px,py+fs1+5);
-      if(rh<72)return;ctx.font="10px 'Malgun Gothic','맑은 고딕','Noto Sans KR',sans-serif";ctx.fillStyle='rgba(255,255,255,0.75)';ctx.fillText(pct.toFixed(2)+'%',px,py+fs1+5+(rw>80?17:12)+3);
+      if(rh<48)return;ctx.font='bold '+(rw>80?17:12)+"px 'Malgun Gothic','맑은 고딕',sans-serif";ctx.fillText((r.d.value/1e8).toFixed(2)+'억',px,py+fs1+5);
+      if(rh<72)return;ctx.font="10px 'Malgun Gothic','맑은 고딕',sans-serif";ctx.fillStyle='rgba(255,255,255,0.75)';ctx.fillText(pct.toFixed(2)+'%',px,py+fs1+5+(rw>80?17:12)+3);
     });
   }
   var tt=document.createElement('div');tt.style.cssText='position:fixed;background:rgba(26,35,50,0.92);color:#fff;padding:8px 12px;border-radius:8px;font-size:12px;pointer-events:none;display:none;z-index:9999;line-height:1.7;box-shadow:0 4px 12px rgba(0,0,0,.2)';document.body.appendChild(tt);
-  canvas.addEventListener('mousemove',function(e){var rc=canvas.getBoundingClientRect(),mx=e.clientX-rc.left,my=e.clientY-rc.top,hit=null;lastRects.forEach(function(item){var r=item.r;if(mx>=r.x&&mx<=r.x+r.w&&my>=r.y&&my<=r.y+r.h)hit=item;});if(hit){tt.innerHTML='<strong>'+hit.r.d.full+'</strong><br>'+(hit.r.d.value/1e8).toFixed(2)+'억원 ('+(hit.r.d.value/hit.total*100).toFixed(2)+'%)';tt.style.display='block';tt.style.left=(e.clientX+14)+'px';tt.style.top=(e.clientY-10)+'px';canvas.style.cursor='pointer';}else{tt.style.display='none';canvas.style.cursor='default';}}); canvas.addEventListener('mouseleave',function(){tt.style.display='none';});
-  function tryDraw(){if(container.clientWidth>0&&container.clientHeight>0)draw();else requestAnimationFrame(tryDraw);}tryDraw();new ResizeObserver(draw).observe(container);
+  canvas.addEventListener('mousemove',function(e){var rc=canvas.getBoundingClientRect(),mx=e.clientX-rc.left,my=e.clientY-rc.top,hit=null;lastRects.forEach(function(item){var r=item.r;if(mx>=r.x&&mx<=r.x+r.w&&my>=r.y&&my<=r.y+r.h)hit=item;});if(hit){tt.innerHTML='<strong>'+hit.r.d.full+'</strong><br>'+(hit.r.d.value/1e8).toFixed(2)+'억원 ('+(hit.r.d.value/hit.total*100).toFixed(2)+'%)';tt.style.display='block';tt.style.left=(e.clientX+14)+'px';tt.style.top=(e.clientY-10)+'px';canvas.style.cursor='pointer';}else{tt.style.display='none';canvas.style.cursor='default';}});
+  canvas.addEventListener('mouseleave',function(){tt.style.display='none';});
+  function tryDraw(){if(container.clientWidth>0&&container.clientHeight>0)draw();else requestAnimationFrame(tryDraw);}
+  tryDraw();new ResizeObserver(draw).observe(container);
 })();
  
+// ── 인당 평균급여 바 차트 ──
 (function(){
   var cv=document.getElementById('cAvgSal');
-  var tt=document.createElement('div');
-  tt.style.cssText='position:fixed;background:rgba(26,35,50,0.92);color:#fff;padding:6px 10px;border-radius:6px;font-size:11px;pointer-events:none;display:none;z-index:9999;';
-  document.body.appendChild(tt);
+  if(!cv)return;
+  var tt=document.createElement('div');tt.style.cssText='position:fixed;background:rgba(26,35,50,0.92);color:#fff;padding:6px 10px;border-radius:6px;font-size:11px;pointer-events:none;display:none;z-index:9999;';document.body.appendChild(tt);
   var brs=[];
   function draw(){
-    var W=cv.offsetWidth,H=cv.offsetHeight;cv.width=W;cv.height=H;
+    var W=cv.offsetWidth,H=cv.offsetHeight;if(!W||!H)return;cv.width=W;cv.height=H;
     var ctx=cv.getContext('2d'),pl=44,pr=10,pt=10,pb=52,cw=W-pl-pr,ch=H-pt-pb;
     var n=avgVals.length,maxV=Math.max.apply(null,avgVals)*1.15;
     var gap=cw/n,bw=Math.max(6,gap*0.6);
-    ctx.strokeStyle='rgba(0,0,0,0.06)';ctx.lineWidth=1;
-    for(var yi=0;yi<=4;yi++){
-      var yv=maxV/4*yi,yp=pt+ch-ch*yv/maxV;
-      ctx.beginPath();ctx.moveTo(pl,yp);ctx.lineTo(pl+cw,yp);ctx.stroke();
-      ctx.fillStyle='#5a6a7a';ctx.font="10px 'Noto Sans KR',sans-serif";ctx.textAlign='right';
-      ctx.fillText(Math.round(yv)+'만',pl-4,yp+4);
-    }
+    ctx.strokeStyle=G;ctx.lineWidth=1;
+    for(var yi=0;yi<=4;yi++){var yv=maxV/4*yi,yp=pt+ch-ch*yv/maxV;ctx.beginPath();ctx.moveTo(pl,yp);ctx.lineTo(pl+cw,yp);ctx.stroke();ctx.fillStyle='#5a6a7a';ctx.font="10px 'Noto Sans KR',sans-serif";ctx.textAlign='right';ctx.fillText(Math.round(yv)+'만',pl-4,yp+4);}
     brs=[];
     for(var i=0;i<n;i++){
-      var bh=ch*avgVals[i]/maxV,bx=pl+gap*i+(gap-bw)/2,by=pt+ch-bh;
-      var r2=Math.min(3,bw/2);
+      var bh=ch*avgVals[i]/maxV,bx=pl+gap*i+(gap-bw)/2,by=pt+ch-bh,r2=Math.min(3,bw/2);
       ctx.fillStyle=COLORS[i%COLORS.length];
-      ctx.beginPath();ctx.moveTo(bx+r2,by);ctx.lineTo(bx+bw-r2,by);ctx.arcTo(bx+bw,by,bx+bw,by+r2,r2);
-      ctx.lineTo(bx+bw,by+bh);ctx.lineTo(bx,by+bh);ctx.lineTo(bx,by+r2);ctx.arcTo(bx,by,bx+r2,by,r2);
-      ctx.closePath();ctx.fill();
+      ctx.beginPath();ctx.moveTo(bx+r2,by);ctx.lineTo(bx+bw-r2,by);ctx.arcTo(bx+bw,by,bx+bw,by+r2,r2);ctx.lineTo(bx+bw,by+bh);ctx.lineTo(bx,by+bh);ctx.lineTo(bx,by+r2);ctx.arcTo(bx,by,bx+r2,by,r2);ctx.closePath();ctx.fill();
       brs.push({x:bx,y:by,w:bw,h:bh,nm:avgNames[i],val:avgVals[i]});
-      ctx.save();ctx.fillStyle='#5a6a7a';ctx.font="9px 'Noto Sans KR',sans-serif";ctx.textAlign='right';
-      ctx.translate(pl+gap*i+gap/2,pt+ch+8);ctx.rotate(-Math.PI/4);ctx.fillText(avgNames[i],0,0);ctx.restore();
+      ctx.save();ctx.fillStyle='#5a6a7a';ctx.font="9px 'Noto Sans KR',sans-serif";ctx.textAlign='right';ctx.translate(pl+gap*i+gap/2,pt+ch+8);ctx.rotate(-Math.PI/4);ctx.fillText(avgNames[i],0,0);ctx.restore();
     }
   }
-  cv.addEventListener('mousemove',function(e){
-    var rc=cv.getBoundingClientRect(),mx=e.clientX-rc.left,my=e.clientY-rc.top,hit=null;
-    brs.forEach(function(b){if(mx>=b.x&&mx<=b.x+b.w&&my>=b.y&&my<=b.y+b.h)hit=b;});
-    if(hit){tt.textContent=hit.nm+' '+hit.val.toLocaleString()+'만원';tt.style.display='block';tt.style.left=(e.clientX+10)+'px';tt.style.top=(e.clientY-28)+'px';}
-    else{tt.style.display='none';}
-  });
+  cv.addEventListener('mousemove',function(e){var rc=cv.getBoundingClientRect(),mx=e.clientX-rc.left,my=e.clientY-rc.top,hit=null;brs.forEach(function(b){if(mx>=b.x&&mx<=b.x+b.w&&my>=b.y&&my<=b.y+b.h)hit=b;});if(hit){tt.textContent=hit.nm+' '+hit.val.toLocaleString()+'만원';tt.style.display='block';tt.style.left=(e.clientX+10)+'px';tt.style.top=(e.clientY-28)+'px';}else{tt.style.display='none';}});
   cv.addEventListener('mouseleave',function(){tt.style.display='none';});
-  function tryDraw(){if(cv.offsetWidth>0)draw();else requestAnimationFrame(tryDraw);}
+  function tryDraw(){if(cv.offsetWidth>0&&cv.offsetHeight>0)draw();else requestAnimationFrame(tryDraw);}
   tryDraw();new ResizeObserver(draw).observe(cv);
 })();
  
+ 
+ 
+var deptHC={"소셜": [84, 87, 85, 89, 86], "데이드": [49, 50, 53, 52, 47], "브그": [27, 34, 33, 37, 35], "공공": [28, 25, 24, 22, 22], "광사1본": [52, 51, 51, 54, 52], "광사2본": [48, 48, 48, 48, 47], "BX": [16, 16, 17, 17, 17], "세토": [28, 29, 28, 24, 24], "콘커": [7, 9, 9, 9, 9], "미전": [null, null, null, 32, 31], "팀민트": [64, 62, 65, 62, 62], "AI Studio": [8, 8, 8, 8, 8], "랩스": [14, 13, 13, 16, 14], "쇼츠비": [null, null, 2, 3, 3], "경영부문": [null, null, null, 56, 52], "CEO Office": [1, 1, 4, 4, 4], "이사회": [null, null, null, 3, 3], "경영임원": [1, 1, 1, 1, 1]};
+// ── 월별 재직인원 추이 ──
 (function(){
-  var chartCanvas=document.getElementById('cHead');
-  (function(){
   var cv=document.getElementById('cHead');
-  var tt2=document.createElement('div');
-  tt2.style.cssText='position:fixed;background:rgba(26,35,50,0.95);color:#fff;padding:10px 14px;border-radius:8px;font-size:11px;pointer-events:none;display:none;z-index:9999;line-height:1.8;min-width:160px;box-shadow:0 4px 12px rgba(0,0,0,.2)';
-  document.body.appendChild(tt2);
+  var sel=document.getElementById('hcSelect');
+  if(!cv||!sel)return;
+ 
+  var tip=document.createElement('div');
+  tip.style.cssText='position:fixed;background:rgba(26,35,50,0.93);color:#fff;padding:8px 12px;border-radius:8px;font-size:11px;pointer-events:none;display:none;z-index:9999;line-height:1.7;box-shadow:0 4px 12px rgba(0,0,0,.2)';
+  document.body.appendChild(tip);
+ 
+  function getVals(){
+    var key=sel.value;
+    if(key==='__all__') return {vals:hcValues,labels:hcLabels,title:'전체 재직인원 추이',color:'#2563a8'};
+    var raw=deptHC[key]||[];
+    var vals=[],labels=[];
+    for(var i=0;i<hcLabels.length;i++){
+      if(raw[i]!==null&&raw[i]!==undefined){vals.push(raw[i]);labels.push(hcLabels[i]);}
+    }
+    return {vals:vals,labels:labels,title:key+' 인원 추이',color:'#e07b39'};
+  }
+ 
   var lpts=[];
   function draw(){
-    var W=cv.offsetWidth,H=Math.max(cv.parentElement.offsetHeight||0,280);cv.width=W;cv.height=H;
-    var ctx=cv.getContext('2d'),pl=46,pr=16,pt=14,pb=28,cw=W-pl-pr,ch=H-pt-pb;
-    var n=hcValues.length;
-    var minV=Math.min.apply(null,hcValues),maxV=Math.max.apply(null,hcValues);
-    var span=Math.max(maxV-minV,10),padV=span*0.2,lo=minV-padV,hi=maxV+padV;
-    ctx.strokeStyle='rgba(0,0,0,0.06)';ctx.lineWidth=1;
+    var rect=cv.parentElement.getBoundingClientRect();
+    var W=Math.round(rect.width)||800;
+    var tableEl=document.getElementById('hcTable');
+    var H=tableEl?Math.max(tableEl.offsetHeight,200):320;
+    cv.width=W; cv.height=H;
+    var ctx=cv.getContext('2d');
+    if(!ctx)return;
+    ctx.clearRect(0,0,W,H);
+ 
+    var d=getVals();
+    if(d.vals.length===0){
+      ctx.fillStyle='#9aa5b1';ctx.font="13px 'Noto Sans KR',sans-serif";ctx.textAlign='center';
+      ctx.fillText('데이터 없음',W/2,H/2);return;
+    }
+ 
+    var pl=50,pr=20,pt=30,pb=32,cw=W-pl-pr,ch=H-pt-pb;
+    var minV=Math.min.apply(null,d.vals),maxV=Math.max.apply(null,d.vals);
+    var span=Math.max(maxV-minV,5);
+    var lo=minV-span*0.2,hi=maxV+span*0.2;
+ 
+    // 타이틀
+    ctx.fillStyle=d.color;ctx.font="bold 12px 'Noto Sans KR',sans-serif";ctx.textAlign='left';
+    ctx.fillText(d.title,pl,18);
+ 
+    // 그리드 & y축
     for(var yi=0;yi<=4;yi++){
-      var yv=lo+(hi-lo)/4*yi,yp=pt+ch-ch*(yv-lo)/(hi-lo);
+      var yv=lo+(hi-lo)/4*yi;
+      var yp=Math.round(pt+ch-ch*(yv-lo)/(hi-lo));
+      ctx.strokeStyle='rgba(0,0,0,0.06)';ctx.lineWidth=1;
       ctx.beginPath();ctx.moveTo(pl,yp);ctx.lineTo(pl+cw,yp);ctx.stroke();
       ctx.fillStyle='#5a6a7a';ctx.font="10px 'Noto Sans KR',sans-serif";ctx.textAlign='right';
-      ctx.fillText(Math.round(yv)+'명',pl-4,yp+4);
+      ctx.fillText(Math.round(yv)+'명',pl-5,yp+4);
     }
+ 
+    // 포인트
     lpts=[];
+    var n=d.vals.length;
     for(var i=0;i<n;i++){
-      var px=pl+(n===1?cw/2:cw/(n-1)*i),py=pt+ch-ch*(hcValues[i]-lo)/(hi-lo);
-      lpts.push({x:px,y:py,i:i});
+      var px=Math.round(pl+(n===1?cw/2:cw/(n-1)*i));
+      var py=Math.round(pt+ch-ch*(d.vals[i]-lo)/(hi-lo));
+      lpts.push({x:px,y:py,val:d.vals[i],label:d.labels[i]});
       ctx.fillStyle='#5a6a7a';ctx.font="10px 'Noto Sans KR',sans-serif";ctx.textAlign='center';
-      ctx.fillText(hcLabels[i],px,pt+ch+pb-2);
+      ctx.fillText(d.labels[i],px,pt+ch+pb-4);
     }
-    ctx.beginPath();ctx.moveTo(lpts[0].x,pt+ch);
+ 
+    // 채우기
+    ctx.beginPath();
+    ctx.moveTo(lpts[0].x,pt+ch);
     for(var i=0;i<lpts.length;i++)ctx.lineTo(lpts[i].x,lpts[i].y);
-    ctx.lineTo(lpts[lpts.length-1].x,pt+ch);ctx.closePath();
-    ctx.fillStyle='rgba(37,99,168,0.07)';ctx.fill();
+    ctx.lineTo(lpts[lpts.length-1].x,pt+ch);
+    ctx.closePath();
+    ctx.fillStyle=d.color==='#2563a8'?'rgba(37,99,168,0.07)':'rgba(224,123,57,0.08)';
+    ctx.fill();
+ 
+    // 라인
     ctx.beginPath();ctx.moveTo(lpts[0].x,lpts[0].y);
     for(var i=1;i<lpts.length;i++){
-      var cpx1=lpts[i-1].x+(lpts[i].x-lpts[i-1].x)/3,cpx2=lpts[i].x-(lpts[i].x-lpts[i-1].x)/3;
-      ctx.bezierCurveTo(cpx1,lpts[i-1].y,cpx2,lpts[i].y,lpts[i].x,lpts[i].y);
+      var cx1=lpts[i-1].x+(lpts[i].x-lpts[i-1].x)/3;
+      var cx2=lpts[i].x-(lpts[i].x-lpts[i-1].x)/3;
+      ctx.bezierCurveTo(cx1,lpts[i-1].y,cx2,lpts[i].y,lpts[i].x,lpts[i].y);
     }
-    ctx.strokeStyle='#2563a8';ctx.lineWidth=2;ctx.stroke();
+    ctx.strokeStyle=d.color;ctx.lineWidth=2;ctx.stroke();
+ 
+    // 점
     lpts.forEach(function(p){
       ctx.beginPath();ctx.arc(p.x,p.y,5,0,Math.PI*2);
-      ctx.fillStyle='#2563a8';ctx.fill();
+      ctx.fillStyle=d.color;ctx.fill();
       ctx.strokeStyle='#fff';ctx.lineWidth=1.5;ctx.stroke();
     });
   }
+ 
+  // 마우스 툴팁
   cv.addEventListener('mousemove',function(e){
     var rc=cv.getBoundingClientRect(),mx=e.clientX-rc.left,hit=null,minD=9999;
-    lpts.forEach(function(p){var d=Math.abs(p.x-mx);if(d<minD){minD=d;hit=p;}});
+    lpts.forEach(function(p){var dd=Math.abs(p.x-mx);if(dd<minD){minD=dd;hit=p;}});
     if(hit&&minD<40){
-      var ym=hcLabels[hit.i],depts=monthlyHR[ym]||[];
-      var h2='<div style="font-weight:700;font-size:12px;margin-bottom:4px">'+ym+' 재직인원: '+hcValues[hit.i]+'명</div>';
-      var hl=depts.filter(function(d){return d.joined>0||d.left>0;});
-      if(hl.length>0){
-        h2+='<div style="color:#a0aec0;font-size:10px;margin:4px 0 2px;border-top:1px solid rgba(255,255,255,.2);padding-top:5px">사업부별 입/퇴사</div>';
-        hl.forEach(function(d){h2+='<div style="font-size:10px"><span style="color:#8bb3d9">'+d.dept+'</span> 입<b style="color:#6aaa8c">'+d.joined+'</b> 퇴<b style="color:#e07b39">'+d.left+'</b></div>';});
-      }
-      tt2.innerHTML=h2;tt2.style.display='block';
-      var tx=e.clientX+14,ty=e.clientY-10;
-      if(tx+210>window.innerWidth)tx=e.clientX-220;
-      tt2.style.left=tx+'px';tt2.style.top=ty+'px';
-    } else{tt2.style.display='none';}
+      tip.innerHTML='<b>'+hit.label+'</b> '+hit.val+'명';
+      tip.style.display='block';
+      tip.style.left=(e.clientX+12)+'px';tip.style.top=(e.clientY-36)+'px';
+    }else{tip.style.display='none';}
   });
-  cv.addEventListener('mouseleave',function(){tt2.style.display='none';});
-  function tryDraw(){if(cv.offsetWidth>0)draw();else requestAnimationFrame(tryDraw);}
-  tryDraw();new ResizeObserver(draw).observe(cv);
-})();
+  cv.addEventListener('mouseleave',function(){tip.style.display='none';});
+ 
+  // select 변경
+  sel.addEventListener('change',draw);
+ 
+  // 비밀번호 해제 후 재실행
+  function tryDraw(){
+    var w=cv.parentElement?cv.parentElement.getBoundingClientRect().width:0;
+    if(w>10){draw();}else{setTimeout(tryDraw,200);}
+  }
+  setTimeout(tryDraw,200);
+  new ResizeObserver(draw).observe(cv);
 })();
 </script>
  
@@ -412,6 +468,7 @@ function checkPw(){
   if(v==='6169'){
     document.getElementById('pw-overlay').style.display='none';
     document.getElementById('pw-style').remove();
+    setTimeout(function(){window.dispatchEvent(new Event('resize'));},200);
   } else {
     document.getElementById('pw-err').style.display='block';
     document.getElementById('pw-input').value='';
